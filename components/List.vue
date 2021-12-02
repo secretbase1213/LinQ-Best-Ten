@@ -713,7 +713,8 @@ export default {
     playMusic(song) {
       const config = {
         headers: {
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': '*',
         }
       }
       axios.get(`https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`, config)
