@@ -54,6 +54,8 @@
 
 <script>
 import axios from 'axios';
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 export default {
   name: 'List',
@@ -713,9 +715,7 @@ export default {
     playMusic(song) {
       const config = {
         headers: {
-          // 'Accept': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json;charset=utf-8',
+          'Accept': 'application/json',
         }
       }
       axios.get(`https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`, config)
