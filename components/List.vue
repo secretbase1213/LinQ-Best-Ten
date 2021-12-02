@@ -54,9 +54,9 @@
 
 <script>
 import axios from 'axios';
-axios.defaults.baseURL = 'https://linq-best-ten.netlify.app/';
-axios.defaults.headers.get['Content-Type'] = 'application/json;charset=utf-8';
-axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
+// axios.defaults.baseURL = 'https://linq-best-ten.netlify.app/';
+// axios.defaults.headers.get['Content-Type'] = 'application/json;charset=utf-8';
+// axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
 
 export default {
   name: 'List',
@@ -714,12 +714,12 @@ export default {
     },
 
     playMusic(song) {
-      const config = {
-        headers: {
-          'Accept': 'application/json',
-        }
-      }
-      axios.get(`https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`, config)
+      // const config = {
+      //   headers: {
+      //     'Accept': 'application/json',
+      //   }
+      // }
+      axios.get(`https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`)
         .then((res) => {
           // console.log(res);
           // console.log(res.data.results[0].previewUrl);
