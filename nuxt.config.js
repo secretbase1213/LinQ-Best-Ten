@@ -61,7 +61,8 @@ export default {
 
   proxy: {
     '/api/': {
-      target: 'https://linq-best-ten.netlify.app', pathRewrite: {
+      // target: 'https://linq-best-ten.netlify.app', pathRewrite: {
+      target: 'https://itunes.apple.com', pathRewrite: {
         '^/api/': ''
       }
     }
