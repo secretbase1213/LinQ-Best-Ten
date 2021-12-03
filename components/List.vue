@@ -59,6 +59,7 @@ import axios from 'axios';
 // axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
 // axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 // axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 export default {
   name: 'List',
@@ -721,9 +722,6 @@ export default {
         method: 'get',
         url: `https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`,
         withCredentials: true,
-        // params: {
-        //   access_token: SECRET_TOKEN,
-        // },
       })
       
       // const config = {
