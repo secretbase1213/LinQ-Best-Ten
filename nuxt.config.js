@@ -58,7 +58,7 @@ export default {
 
   proxy: {
     '/api/': {
-      target: 'http://localhost:3000', pathRewrite: {
+      target: 'https://linq-best-ten.netlify.app/', pathRewrite: {
         '^/api/': ''
       }
     }
