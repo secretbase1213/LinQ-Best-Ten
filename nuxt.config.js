@@ -63,8 +63,8 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
+    proxy: true,
     prefix: '/api',
-    // proxy: true,
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
