@@ -718,11 +718,11 @@ export default {
 
     playMusic(song) {
 
-      axios({
-        method: 'get',
-        url: `https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`,
-        withCredentials: true,
-      })
+      // axios({
+      //   method: 'get',
+      //   url: `https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`,
+      //   withCredentials: true,
+      // })
       
       // const config = {
       //   headers: {
@@ -730,6 +730,7 @@ export default {
       //   }
       // }
       // axios.get(`https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`, config)
+      axios.get(`https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`)
         .then((res) => {
           // console.log(res);
           // console.log(res.data.results[0].previewUrl);
