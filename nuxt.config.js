@@ -45,6 +45,7 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     'vue-sweetalert2/nuxt',
+    '@nuxt/http',
   ],
 
   bootstrapVue: {
@@ -54,6 +55,8 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
+    baseURL: "https://linq-best-ten.netlify.app/",
+    browserBaseURL: "https://linq-best-ten.netlify.app/",
   },
 
   proxy: {
