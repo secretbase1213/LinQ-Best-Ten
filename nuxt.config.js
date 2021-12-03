@@ -41,6 +41,7 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
+    '@nuxtjs/proxy',
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
@@ -52,19 +53,20 @@ export default {
     icons: true
   },
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    proxy: true,
-  },
-
   proxy: {
     "/api": 'https://itunes.apple.com',
     // '/api': {
-      // target: 'https://linq-best-ten.netlify.app', pathRewrite: {
-      // target: 'https://itunes.apple.com', pathRewrite: {
-      //   '^/api': '/'
-      // }
+    // target: 'https://linq-best-ten.netlify.app', pathRewrite: {
+    // target: 'https://itunes.apple.com', pathRewrite: {
+    //   '^/api': '/'
     // }
+    // }
+  },
+
+  // Axios module configuration: https://go.nuxtjs.dev/config-axios
+  axios: {
+    prefix: '/api',
+    // proxy: true,
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
