@@ -825,7 +825,6 @@ export default {
 }
 
 .music-player {
-  background-color: beige;
   height: 80px;
   width: 200px;
 }
