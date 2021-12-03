@@ -62,10 +62,10 @@ export default {
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    proxy: true,
-    prefix: '/search',
-  },
+  // axios: {
+  //   proxy: true,
+  //   prefix: '/search',
+  // },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {

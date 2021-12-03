@@ -4,7 +4,7 @@
       <b-col
           v-for="song in songsList"
           :key="song.id"
-          cols="12" sm="4"
+          cols="12" sm="4" lg="2"
           class="mb-4"
           @click="clickedCard(song)"
       >
@@ -54,13 +54,12 @@
 
 <script>
 import axios from 'axios';
-// axios.defaults.baseURL = 'https://linq-best-ten.netlify.app/';
+axios.defaults.baseURL = 'https://itunes.apple.com';
 // axios.defaults.headers.get['Content-Type'] = 'application/json;charset=utf-8';
 // axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
 // axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 // axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-// axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://linq-best-ten.netlify.app/*';
 
 export default {
   name: 'List',
