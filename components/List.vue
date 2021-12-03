@@ -43,11 +43,11 @@
     <b-list-group>
       <b-list-group-item v-for="(song, index) in bestTenList" :key="song.id"
         class="d-flex justify-content-between align-items-center">{{ index + 1 + ': ' + song.title }}
-          <b-btn variant="outline-primary" @click="copyToClipboard(song.title)" pill>コピー</b-btn>
+          <b-btn variant="outline-primary" pill @click="copyToClipboard(song.title)">コピー</b-btn>
       </b-list-group-item>
     </b-list-group>
     <div class="mt-4 text-center">
-      <b-btn variant="outline-secondary" @click="returnBtn()" pill>戻る</b-btn>
+      <b-btn variant="outline-secondary" pill @click="returnBtn()">戻る</b-btn>
     </div>
   </b-container>
 </template>
@@ -714,12 +714,22 @@ export default {
     },
 
     playMusic(song) {
+
+      axios({
+        method: 'get',
+        url: `https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`,
+        withCredentials: false,
+        // params: {
+        //   access_token: SECRET_TOKEN,
+        // },
+      })
+      
       // const config = {
       //   headers: {
       //     'Accept': 'application/json',
       //   }
       // }
-      axios.get(`https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`)
+      // axios.get(`https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`, config)
         .then((res) => {
           // console.log(res);
           // console.log(res.data.results[0].previewUrl);
