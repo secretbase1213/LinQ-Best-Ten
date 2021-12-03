@@ -718,7 +718,7 @@ export default {
       axios({
         method: 'get',
         url: `https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`,
-        withCredentials: false,
+        withCredentials: true,
         // params: {
         //   access_token: SECRET_TOKEN,
         // },
