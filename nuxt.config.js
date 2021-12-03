@@ -46,7 +46,6 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     'vue-sweetalert2/nuxt',
-    '@nuxt/http',
   ],
 
   bootstrapVue: {
@@ -54,13 +53,12 @@ export default {
   },
 
   proxy: {
-    "/api": 'https://itunes.apple.com',
-    // '/api': {
-    // target: 'https://linq-best-ten.netlify.app', pathRewrite: {
-    // target: 'https://itunes.apple.com', pathRewrite: {
-    //   '^/api': '/'
-    // }
-    // }
+    '/api': {
+      target: 'https://itunes.apple.com',
+      pathRewrite: {
+        '^/api': '',
+      },
+    },
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
