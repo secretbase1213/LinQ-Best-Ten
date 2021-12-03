@@ -55,17 +55,16 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
-    // baseURL: "https://linq-best-ten.netlify.app/",
-    // browserBaseURL: "https://linq-best-ten.netlify.app/",
   },
 
   proxy: {
-    '/api/': {
+    "/api": 'https://itunes.apple.com',
+    // '/api': {
       // target: 'https://linq-best-ten.netlify.app', pathRewrite: {
-      target: 'https://itunes.apple.com', pathRewrite: {
-        '^/api/': ''
-      }
-    }
+      // target: 'https://itunes.apple.com', pathRewrite: {
+      //   '^/api': '/'
+      // }
+    // }
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
