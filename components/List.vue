@@ -42,24 +42,17 @@
   <b-container v-else class="p-4">
     <b-list-group>
       <b-list-group-item v-for="(song, index) in bestTenList" :key="song.id"
-        class="d-flex justify-content-between align-items-center">{{ index + 1 + ': ' + song.title }}
-          <b-btn variant="outline-primary" pill @click="copyToClipboard(song.title)">コピー</b-btn>
+        class="d-flex justify-content-between align-items-center text-truncate">{{ index + 1 + ': ' + song.title }}
+        <b-icon icon="clipboard" font-scale="1" aria-hidden="true" @click="copyToClipboard(song.title)"></b-icon>
       </b-list-group-item>
     </b-list-group>
     <div class="mt-4 text-center">
-      <b-btn variant="outline-secondary" pill @click="returnBtn()">戻る</b-btn>
+      <b-btn variant="secondary" @click="returnBtn()">戻る</b-btn>
     </div>
   </b-container>
 </template>
 
 <script>
-// import axios from 'axios';
-// axios.defaults.baseURL = 'https://itunes.apple.com';
-// axios.defaults.headers.get['Content-Type'] = 'application/json;charset=utf-8';
-// axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
-// axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
-// axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 const jsonpAdapter = require('axios-jsonp');
 
 export default {
@@ -717,26 +710,26 @@ export default {
       }
     },
 
-    async fetchSample(song) {
+    async fetchItunesApi(song) {
       let ret = null
-      // 非同期処理を記述
+      // 非同期処理をする
       const url = `https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`;
       await this.$axios.$get(url, { adapter: jsonpAdapter })
         .then((response) => {
           ret = response;
         })
         .catch((error) => {
-          this.errorMsg = 'Error! Could not reach the API. ' + error
+          this.errorMsg = 'Error! Could not reach the Itunes Api. ' + error
           console.log(this.errorMsg)
         });
         return ret;
     },
 
     async itunesApi(song) {
-      // this.fetchSample()の実行が完了するまで待機
-      const res = await this.fetchSample(song)
+      // this.fetchItunesApi()の実行が完了するまで待機する
+      const res = await this.fetchItunesApi(song)
       // 待機後の残りの処理を記述
-      if (res.resultCount > 0) {
+      if (res !== null && res.resultCount > 0) {
         if (res.results[0].previewUrl !== undefined) {
           this.auditionSrc = res.results[0].previewUrl;
         } else {
@@ -746,85 +739,20 @@ export default {
         }
       } else {
         this.auditionSrc = "";
-        this.$swal('曲データが見つかりませんでした');
+        this.$swal('試聴データが見つかりませんでした');
         this.stopMusic();
       }
       return song;
     },
 
     async playMusic(song) {
+      this.auditionSrc = "";
+      this.stopMusic();
 
-      const res = await this.itunesApi(song);
-      console.log(res.id);
+      await this.itunesApi(song);
       if (this.auditionSrc !== "") {
         this.toggleSound(song.id);
       }
-
-      /*
-      const url = `https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`;
-      await this.$axios.$get(url, { adapter: jsonpAdapter })
-      .then(function(res) {
-        console.log(res);
-        console.log(res.results[0]);
-        console.log(res.results[0].previewUrl);
-        if (res.resultCount > 0) {
-          if (res.results[0].previewUrl !== undefined) {
-            this.auditionSrc = res.results[0].previewUrl;
-          } else {
-            this.auditionSrc = "";
-            this.$swal('試聴データが存在しませんでした');
-            this.stopMusic();
-          }
-        } else {
-          this.auditionSrc = "";
-          this.$swal('曲データが見つかりませんでした');
-          this.stopMusic();
-        }
-      })
-      .catch(() => {
-        this.state="ERROR"
-      })
-      .finally(function(){
-        if (this.auditionSrc !== "") {
-          this.toggleSound(song.id);
-        }
-      });
-      */
-
-      // axios({
-      //   method: 'get',
-      //   url: `https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`,
-      // withCredentials: true,
-      // 'Access-Control-Allow-Credentials': true,
-      // })
-
-      // const config = {
-      //   headers: {
-      //     'Accept': 'application/json',
-      //   }
-      // }
-      // axios.get(`https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`, config)
-      // axios.get(`/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`).then((res) => {
-        // console.log(res);
-        // console.log(res.data.results[0].previewUrl);
-      //   if (res.resultCount > 0) {
-      //     if (res.results[0].previewUrl !== undefined) {
-      //       this.auditionSrc = res.results[0].previewUrl;
-      //     } else {
-      //       this.auditionSrc = "";
-      //       this.$swal('試聴データが存在しませんでした');
-      //       this.stopMusic();
-      //     }
-      //   } else {
-      //     this.auditionSrc = "";
-      //     this.$swal('曲データが見つかりませんでした');
-      //     this.stopMusic();
-      //   }
-      // }).then(() => {
-      //   if (this.auditionSrc !== "") {
-      //     this.toggleSound(song.id);
-      //   }
-      // });
     },
 
     stopMusic() {
@@ -840,12 +768,10 @@ export default {
         audio.play();
         this.isPlaying = true;
         this.nowPlayingId = songId;
-        // document.querySelector(".toggle-sound").classList.remove("paused");
       } else {
         audio.pause();
         this.isPlaying = false;
         this.nowPlayingId = null;
-        // document.querySelector(".toggle-sound").classList.add("paused");
       }
     },
 
@@ -857,6 +783,13 @@ export default {
       navigator.clipboard.writeText(text)
         .then(() => {
           // console.log("copied!")
+          this.$swal.fire({
+            html: 'コピーしました'
+            , type : 'success'
+            , timer : '1000'
+            , showCancelButton: false
+            , showConfirmButton: false
+          });
         })
         .catch(e => {
           // console.error(e)
@@ -882,7 +815,7 @@ export default {
 }
 
 .rank-cover {
-  top: 35%;
+  top: 15%;
   left: 0;
   position: absolute;
   font-size: 8em;
@@ -895,5 +828,12 @@ export default {
   background-color: beige;
   height: 80px;
   width: 200px;
+}
+</style>
+<style>
+.swal2-title {
+  margin-top: 24px;
+  font-size: 1rem !important;
+  font-family: メイリオ, Meiryo, Verdana, Helvetica, Arial, sans-serif;
 }
 </style>
