@@ -60,7 +60,7 @@ import axios from 'axios';
 // axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 // axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://linq-best-ten.netlify.app/*';
+// axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://linq-best-ten.netlify.app/*';
 
 export default {
   name: 'List',
@@ -719,11 +719,12 @@ export default {
 
     playMusic(song) {
 
-      // axios({
-      //   method: 'get',
-      //   url: `https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`,
-      //   withCredentials: true,
-      // })
+      axios({
+        method: 'get',
+        url: `https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`,
+        // withCredentials: true,
+        'Access-Control-Allow-Credentials': true,
+      })
       
       // const config = {
       //   headers: {
@@ -731,7 +732,7 @@ export default {
       //   }
       // }
       // axios.get(`https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`, config)
-      axios.get(`https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`)
+      // axios.get(`https://itunes.apple.com/search?term=LinQ+${song.title}&country=JP&lang=ja_jp&media=music&entity=song&limit=1`)
         .then((res) => {
           // console.log(res);
           // console.log(res.data.results[0].previewUrl);
