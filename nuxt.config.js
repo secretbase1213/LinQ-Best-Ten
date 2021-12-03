@@ -53,10 +53,10 @@ export default {
   },
 
   proxy: {
-    '/api': {
+    '/search': {
       target: 'https://itunes.apple.com',
       pathRewrite: {
-        '^/api': '',
+        '^/search': '',
       },
     },
   },
@@ -64,7 +64,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
-    prefix: '/api',
+    prefix: '/search',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
